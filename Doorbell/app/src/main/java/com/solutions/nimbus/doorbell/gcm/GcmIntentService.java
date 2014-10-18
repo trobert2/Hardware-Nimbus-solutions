@@ -1,4 +1,4 @@
-package com.solutions.nimbus.doorbell;
+package com.solutions.nimbus.doorbell.gcm;
 
 import android.app.IntentService;
 import android.app.NotificationManager;
@@ -7,6 +7,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+
+import com.solutions.nimbus.doorbell.Home;
+import com.solutions.nimbus.doorbell.R;
+import com.solutions.nimbus.doorbell.util.DoorbellEntrySource;
+
+import java.sql.SQLException;
 
 public class GcmIntentService extends IntentService {
 
@@ -22,7 +28,15 @@ public class GcmIntentService extends IntentService {
 		Bundle extras = intent.getExtras();
 		
         if (!extras.isEmpty()) {
-        	sendNotification(extras.getString("message"));        	
+            String date = extras.getString("date");
+            String message = extras.getString("message");
+            DoorbellEntrySource doorbellEntrySource = new DoorbellEntrySource(getApplicationContext());
+            try {
+                doorbellEntrySource.createDoorbellEntry(date, message);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            sendNotification(extras.getString("message"));
         }
 
         GcmBroadcastReceiver.completeWakefulIntent(intent);

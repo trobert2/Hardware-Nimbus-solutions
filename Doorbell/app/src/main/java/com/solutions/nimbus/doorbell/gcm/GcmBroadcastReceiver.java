@@ -1,4 +1,4 @@
-package com.solutions.nimbus.doorbell;
+package com.solutions.nimbus.doorbell.gcm;
 
 import android.app.Activity;
 import android.content.ComponentName;

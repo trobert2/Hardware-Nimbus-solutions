@@ -1,4 +1,4 @@
-package com.solutions.nimbus.doorbell;
+package com.solutions.nimbus.doorbell.gcm;
 
 import java.io.IOException;
 import java.io.InputStream;

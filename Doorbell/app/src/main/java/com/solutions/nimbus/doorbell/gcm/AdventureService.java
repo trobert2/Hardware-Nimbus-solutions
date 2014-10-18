@@ -1,5 +1,7 @@
-package com.solutions.nimbus.doorbell;
+package com.solutions.nimbus.doorbell.gcm;
 
+
+import com.solutions.nimbus.doorbell.Event;
 
 public class AdventureService extends BaseService {
 

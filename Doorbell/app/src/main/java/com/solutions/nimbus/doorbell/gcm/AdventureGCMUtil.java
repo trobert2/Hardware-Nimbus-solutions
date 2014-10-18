@@ -1,4 +1,4 @@
-package com.solutions.nimbus.doorbell;
+package com.solutions.nimbus.doorbell.gcm;
 
 import java.io.IOException;
 
@@ -13,6 +13,7 @@ import android.util.Log;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.solutions.nimbus.doorbell.Home;
 
 public class AdventureGCMUtil {
 

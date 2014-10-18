@@ -1,11 +1,23 @@
 package com.solutions.nimbus.doorbell;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
-public class Home extends Activity {
+import com.solutions.nimbus.doorbell.gcm.AdventureGCMUtil;
+import com.solutions.nimbus.doorbell.util.DoorbellEntrySource;
+
+import java.sql.SQLException;
+import java.util.Collections;
+import java.util.List;
+
+public class Home extends ListActivity {
+    private DoorbellEntrySource datasource;
+
 
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +31,21 @@ public class Home extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_home);
+
+        datasource = new DoorbellEntrySource(this);
+
+
+        List<DoorbellEntry> doorbellEntryList = null;
+        try {
+            doorbellEntryList = datasource.getAllComments();
+            ArrayAdapter<DoorbellEntry> adapter = new ArrayAdapter<DoorbellEntry>(this,
+                    android.R.layout.simple_list_item_1, doorbellEntryList);
+
+            setListAdapter(adapter);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
 //        PopulateListViewTask populateListViewTask = new PopulateListViewTask();
 //        populateListViewTask.execute();
@@ -52,5 +79,12 @@ public class Home extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+
+        super.onResume();
+        this.onCreate(null);
     }
 }
