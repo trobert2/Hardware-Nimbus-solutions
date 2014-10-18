@@ -5,15 +5,35 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
 public class Home extends Activity {
+
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_home);
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-    }
 
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_home);
+
+//        PopulateListViewTask populateListViewTask = new PopulateListViewTask();
+//        populateListViewTask.execute();
+
+        if (AdventureGCMUtil.checkPlayServices(this)) {
+
+            AdventureGCMUtil.registrateInGCM(getApplicationContext(), this);
+
+        } else {
+//            Log.i(TAG, "No valid Google Play Services APK found.");
+        }
+
+//        Log.i(TAG, "ID " + AdventureGCMUtil.getRegId());
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
