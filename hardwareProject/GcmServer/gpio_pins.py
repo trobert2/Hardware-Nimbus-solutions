@@ -8,7 +8,9 @@ gcm = GCM(API_KEY)
 
 now = datetime.now()
 data = {'message':'You have a new visitor!', 'date': now.strftime('%c')}
-gerry = 'APA91bHzyoacjLlzbGzUIH3_asktUdZpmr86SUe9FcW-IcO5se3hLNLHWcaZZfYBu-25avhrhTpT5J280yzqfLrxQxEFT72f4bbg8G7xZn65weFXOzsyU2jBvuZwzit_qI6LasfImMqcCtwKSPbNlsDLE5poibcNlc0BF3hkNH1QnIrs8Bzztn4'
+gerry = 'APA91bGqpGh2ZLghwXyGhZx93DB8Xy36ghCy5XZ_Wn1wWOr1M4ZP0OOOFTAkCZiO0J3Vc3CedPcoLzjexYSXNVCXQUfC8pa_aJ1HapQWZn6aPhQCJ0rTHzRI2RgnwJrQM9hbXEm3kFpIEN-zR7G-BBWBrQEc3qR_l974AWkhOAqZvAv73wo1-kQ'
+
+#gerry = 'APA91bHzyoacjLlzbGzUIH3_asktUdZpmr86SUe9FcW-IcO5se3hLNLHWcaZZfYBu-25avhrhTpT5J280yzqfLrxQxEFT72f4bbg8G7xZn65weFXOzsyU2jBvuZwzit_qI6LasfImMqcCtwKSPbNlsDLE5poibcNlc0BF3hkNH1QnIrs8Bzztn4'
 
 def push_notification():
 	reg_ids = [gerry]
@@ -20,6 +22,7 @@ def push_notification():
 	    registration_ids=reg_ids, data=data,
 	    collapse_key='uptoyou', delay_while_idle=True, time_to_live=3600
 	)
+	print res
 
 
 GPIO.setmode(GPIO.BOARD)
