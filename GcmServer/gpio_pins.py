@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
-import random
+import time
+
 from gcm import GCM
 from datetime import datetime
 API_KEY = 'AIzaSyCe1SKR17Y_3NPVql7fhJOW6kGpay_bIfg'
@@ -25,15 +26,12 @@ GPIO.setmode(GPIO.BOARD)
 
 while True:
 	try:
-
-		GPIO.setup(7, GPIO.IN)
+		GPIO.setup(7, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 		GPIO.wait_for_edge(7, GPIO.RISING, 20)
-		response = ['You have very smooth hair', 'You are quite strapping.',
-			    'I disagree with anyone who disagrees with you.', 
-			    'Your smile is breath taking.', 
-			    'I am grateful to be blessed by your presence.']
-#		print random.choice(response)
-                push_notification()
+		push_notification()
+		print "sent"
+		time.sleep(1)
 		GPIO.cleanup()
-	except Exception:
-		pass
+	except Exception as e:
+		raise e
+
