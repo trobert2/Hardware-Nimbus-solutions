@@ -1,12 +1,10 @@
 package com.solutions.nimbus.doorbell;
 
-import android.app.Activity;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import com.solutions.nimbus.doorbell.gcm.AdventureGCMUtil;
 import com.solutions.nimbus.doorbell.util.DoorbellEntrySource;
@@ -38,6 +36,8 @@ public class Home extends ListActivity {
         List<DoorbellEntry> doorbellEntryList = null;
         try {
             doorbellEntryList = datasource.getAllComments();
+            Collections.reverse(doorbellEntryList);
+//            Arrays.sort(doorbellEntryList, Collections.reverseOrder());
             ArrayAdapter<DoorbellEntry> adapter = new ArrayAdapter<DoorbellEntry>(this,
                     android.R.layout.simple_list_item_1, doorbellEntryList);
 

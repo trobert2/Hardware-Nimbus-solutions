@@ -6,5 +6,7 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_demo">DemoActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="messageForDoor">Type a response for your visitor:</string>
+    <string name="title_activity_response">Response</string>
 
 </resources>
