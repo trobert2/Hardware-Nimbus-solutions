@@ -10,9 +10,19 @@ volume=100
 
 @app.route("/incoming", methods=["POST"])
 def hello():
-    lang='en'
-    message=request.data.split('=')[1].replace('+', " ")
-    app.logger.debug(message)
+    data = request.data.replace('+', ' ').split('&')
+    message=data[0].split('=')[1]
+    language=str(data[1].split('=')[1])
+    if language=='Romanian':
+        lang='ro'
+    elif language=='Hungarian':
+        lang='hu'
+    elif language=='French':
+        lang='fr'
+    else:
+        lang='en'
+
+    app.logger.debug(lang)
 
     t2s.get_tts_mp3(lang, message, 'welcome.mp3')
     bashCommand = "mpg321 -g "+str(volume) +" welcome.mp3"

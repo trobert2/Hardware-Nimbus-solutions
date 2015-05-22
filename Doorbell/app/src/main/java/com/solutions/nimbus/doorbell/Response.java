@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
@@ -45,7 +46,10 @@ public class Response extends Activity {
     public void addKeyListener() {
         //get edittext component
         edittext = (EditText) findViewById(R.id.editText);
+        final Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
+
         final Intent intent = new Intent(this, Home.class);
+
         // add a keylistener to keep track user input
         edittext.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -54,6 +58,7 @@ public class Response extends Activity {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
 
                     String text = edittext.getText().toString().toLowerCase();
+                    String lang = String.valueOf(spinner1.getSelectedItem());
 
                     //send to server
                     Toast.makeText(Response.this,
@@ -63,7 +68,7 @@ public class Response extends Activity {
                         Message message = new Message(edittext.getText().toString(), "ro");
 //                        Gson gson = new GsonBuilder().create();
 
-                        new HttpAsyncTask(text).execute(serverEndpoint);
+                        new HttpAsyncTask(text, lang).execute(serverEndpoint);
                         edittext.setText("");
                         startActivity(intent);
                          return true;
@@ -95,7 +100,7 @@ public class Response extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static String POST(String url, String message){
+    public static String POST(String url, String message, String lang){
         InputStream inputStream = null;
         String result = "";
         try {
@@ -108,6 +113,7 @@ public class Response extends Activity {
             List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
 
             urlParameters.add(new BasicNameValuePair("message",  message));
+            urlParameters.add(new BasicNameValuePair("lang",  lang));
             post.setEntity(new UrlEncodedFormEntity(urlParameters));
 
             // make GET request to the given URL
@@ -171,6 +177,7 @@ public class Response extends Activity {
 
     private class HttpAsyncTask extends AsyncTask<String, Void, String> {
         private String message;
+        private String lang;
 
         public String getMessage() {
             return message;
@@ -183,11 +190,12 @@ public class Response extends Activity {
         @Override
         protected String doInBackground(String... urls) {
 
-            return POST(urls[0], this.message);
+            return POST(urls[0], this.message, this.lang);
         }
 
-        private HttpAsyncTask(String message) {
+        private HttpAsyncTask(String message, String lang) {
             this.message = message;
+            this.lang = lang;
         }
 
         // onPostExecute displays the results of the AsyncTask.

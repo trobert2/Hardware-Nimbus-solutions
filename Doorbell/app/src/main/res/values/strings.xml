@@ -9,4 +9,13 @@
     <string name="messageForDoor">Type a response for your visitor:</string>
     <string name="title_activity_response">Response</string>
 
+    <string name="language_prompt">Choose a language</string>
+
+    <string-array name="language_arrays">
+        <item>English</item>
+        <item>Romanian</item>
+        <item>Hungarian</item>
+        <item>French</item>
+    </string-array>
+
 </resources>
