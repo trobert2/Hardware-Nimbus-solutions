@@ -10,7 +10,7 @@ volume=100
 
 @app.route("/incoming", methods=["POST"])
 def hello():
-    data = request.data.replace('+', ' ').split('&')
+    data = urllib.unquote(request.data).replace('+', ' ').split('&')
     message=data[0].split('=')[1]
     language=str(data[1].split('=')[1])
     if language=='Romanian':
@@ -22,6 +22,7 @@ def hello():
     else:
         lang='en'
 
+    app.logger.debug(message)
     app.logger.debug(lang)
 
     t2s.get_tts_mp3(lang, message, 'welcome.mp3')
