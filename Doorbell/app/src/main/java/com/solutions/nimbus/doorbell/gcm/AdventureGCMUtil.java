@@ -18,7 +18,7 @@ import java.io.IOException;
 public class AdventureGCMUtil {
 
 	private static final String TAG = "doorbell-nimbus-666";
-	private static final String SENDER_ID = "969132104245";
+	private static final String SENDER_ID = "564802260412";
 	private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 	private static final String PROPERTY_REG_ID = "registration_id";
 	private static final String PROPERTY_APP_VERSION = "appVersion";
@@ -140,7 +140,7 @@ public class AdventureGCMUtil {
 	}	
 	
 	private static void sendRegistrationIdToBackend() {
-
+        //TODO: Get the key to the server so we don't have to copy paste it
 	}
 	
 	private static void storeRegistrationId(Context context, String newRegId, Activity activity) {

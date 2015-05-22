@@ -32,7 +32,7 @@ import java.util.List;
 public class Response extends Activity {
     private EditText edittext;
     private static final String DONE_TEXT = "Message Sent!";
-    private String serverEndpoint = "http://10.0.186.161:5000/incoming";
+    private String serverEndpoint = "http://10.10.10.20:5000/incoming";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,24 +51,9 @@ public class Response extends Activity {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 // if keydown and "enter" is pressed
 
-
-
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
 
                     String text = edittext.getText().toString().toLowerCase();
-
-                    if("ro".equals(text)) {
-                        serverEndpoint = "http://10.0.186.161:5000/incoming2";
-                    }
-
-
-                    if("hu".equals(text)) {
-                        serverEndpoint = "http://10.0.186.161:5000/incoming3";
-                    }
-                    if("bb".equals(text)) {
-                        serverEndpoint = "http://10.0.186.161:5000/incoming6";
-                    }
-
 
                     //send to server
                     Toast.makeText(Response.this,
@@ -78,9 +63,7 @@ public class Response extends Activity {
                         Message message = new Message(edittext.getText().toString(), "ro");
 //                        Gson gson = new GsonBuilder().create();
 
-
-
-                        new HttpAsyncTask(edittext.getText().toString()).execute(serverEndpoint);
+                        new HttpAsyncTask(text).execute(serverEndpoint);
                         edittext.setText("");
                         startActivity(intent);
                          return true;
@@ -120,15 +103,15 @@ public class Response extends Activity {
             // create HttpClient
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost post = new HttpPost(url);
-            post.setHeader("Content-Type","application/json");
+            post.setHeader("Content-Type", "application/json");
 
             List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
 
-            urlParameters.add(new BasicNameValuePair("message", "{\"message\":" + message + "\"}"));
+            urlParameters.add(new BasicNameValuePair("message",  message));
             post.setEntity(new UrlEncodedFormEntity(urlParameters));
 
             // make GET request to the given URL
-            HttpResponse httpResponse = httpclient.execute(new HttpPost(url));
+            HttpResponse httpResponse = httpclient.execute(post);
 
             // receive response as inputStream
             inputStream = httpResponse.getEntity().getContent();
@@ -145,9 +128,6 @@ public class Response extends Activity {
 
         return result;
     }
-
-
-
 
     public static String GET(String url){
         InputStream inputStream = null;

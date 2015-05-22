@@ -17,12 +17,6 @@ public class Home extends ListActivity {
     private DoorbellEntrySource datasource;
 
 
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_home);
-//    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -46,9 +40,6 @@ public class Home extends ListActivity {
             e.printStackTrace();
         }
 
-
-//        PopulateListViewTask populateListViewTask = new PopulateListViewTask();
-//        populateListViewTask.execute();
 
         if (AdventureGCMUtil.checkPlayServices(this)) {
 

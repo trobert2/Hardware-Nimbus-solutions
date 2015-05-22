@@ -22,7 +22,7 @@ from django.core.cache import cache
 from django.utils import importlib
 
 LOCALHOST = False
-GCM_CONFIG = {'gcm_api_key': 'AIzaSyCe1SKR17Y_3NPVql7fhJOW6kGpay_bIfg',
+GCM_CONFIG = {'gcm_api_key': 'AIzaSyAzubcLXlqRGCrY5f9jxhDs5KdOXZiNt_8',
 #              'delete_bad_token_callback_func': 'EXAMPLE_MANAGE_TOKENS_MODULE.delete_bad_gcm_token',
 #              'update_token_callback_func': 'EXAMPLE_MANAGE_TOKENS_MODULE.update_gcm_token',
               }
