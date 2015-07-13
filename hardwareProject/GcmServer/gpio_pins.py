@@ -1,4 +1,4 @@
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import time
 
 from gcm import GCM
@@ -21,17 +21,17 @@ def push_notification():
     )
     print res
 
-#GPIO.setmode(GPIO.BOARD)
 
 push_notification()
-#while True:
-#    try:
-#        GPIO.setup(7, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-#       	GPIO.wait_for_edge(7, GPIO.RISING, 20)
-#       	push_notification()
-#       	print "sent"
-#       	time.sleep(1)
-#       	GPIO.cleanup()
-#    except Exception as e:
-#        raise e
-#
+while True:
+    try:
+	GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(7, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+       	GPIO.wait_for_edge(7, GPIO.RISING, 20)
+       	push_notification()
+       	print "sent"
+       	time.sleep(1)
+       	GPIO.cleanup()
+    except Exception as e:
+        raise e
+
